@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/daisy.png-fc29d77bf0ca89b763a46792f8a7f813.stex"
+path="res://.import/Empty bag.png-9c5afb5b24ed67a150c21c028f05ffe1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://texture/daisy.png"
-dest_files=[ "res://.import/daisy.png-fc29d77bf0ca89b763a46792f8a7f813.stex" ]
+source_file="res://texture/Bag/Empty bag.png"
+dest_files=[ "res://.import/Empty bag.png-9c5afb5b24ed67a150c21c028f05ffe1.stex" ]
 
 [params]
 
