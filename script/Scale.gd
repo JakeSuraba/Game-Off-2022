@@ -1,7 +1,7 @@
 extends Area2D
 
 
-signal state_changed
+signal display_changed(text)
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -15,7 +15,8 @@ var placedItem: Node2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$ZeroButton.connect("pressed", self, "zero")
+	connect("display_changed", $ScaleDisplay, "updateText")
 
 func zero():
 	print_debug("scale zeroed")
@@ -23,6 +24,7 @@ func zero():
 		zeroOffset = 0.0
 	else:
 		zeroOffset = realWeight
+	updateDisplayWeight()
 	
 func placeItem(item):
 	
@@ -31,29 +33,35 @@ func placeItem(item):
 		print_debug("place offset" + str(item.get_place_offset()))
 		item.position = $SnapPosition.position + item.get_place_offset()
 		placedItem = item
-		realWeight = placedItem.get_weight()
 		updateDisplayWeight()
 		
 		print_debug(displayWeight)
 		
 		item.connect("picked_up", self, "on_placedItem_picked_up")
+		if item.has_signal("weight_changed"):
+			item.connect("weight_changed", self, "updateDisplayWeight")
 
 func on_click_with_item(item):
 	if placedItem == null:
 		placeItem(item)
 		
 func updateDisplayWeight():
+	if placedItem != null:
+		realWeight = placedItem.get_weight()
+	else:
+		realWeight = 0.0
+	
 	displayWeight = realWeight - zeroOffset
-	emit_signal("state_changed")
+	emit_signal("display_changed", str(displayWeight))
 	
 func on_placedItem_picked_up():
 	placedItem.disconnect("picked_up", self, "on_placedItem_picked_up")
+	if placedItem.has_signal("weight_changed"):
+		placedItem.disconnect("weight_changed", self, "updateDisplayWeight")
 	placedItem = null
 	realWeight = 0.0
 	updateDisplayWeight()
-	
-	
-	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

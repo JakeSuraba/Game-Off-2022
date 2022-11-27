@@ -1,6 +1,7 @@
 extends Area2D
 
 signal picked_up
+signal weight_changed
 
 var weight: float = 0.2
 
@@ -29,7 +30,7 @@ func collectFlower(flower):
 		$Sprite.texture = half_texture
 	
 	flower.queue_free()
-	
+	emit_signal("weight_changed")
 	print_debug(weight)
 	return
 
