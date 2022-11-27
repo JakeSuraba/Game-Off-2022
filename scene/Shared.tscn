@@ -1,15 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/Bag.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/Daisy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scene/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://script/Table.gd" type="Script" id=3]
+[ext_resource path="res://texture/Backgrounds/DealRoom.png" type="Texture" id=4]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
 
 [node name="Daisy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 848, 311 )
 
 [node name="Bag" parent="." instance=ExtResource( 1 )]
-position = Vector2( 264, 197 )
+position = Vector2( 302, 309 )
 
-[node name="Hand" parent="." instance=ExtResource( 3 )]
+[node name="Table" type="Area2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table"]
+polygon = PoolVector2Array( 607, 583, 382, 795, 592, 792, 677, 660, 845, 659, 805, 800, 1541, 798, 1310, 583 )
+
+[connection signal="mouse_entered" from="Bag" to="Bag" method="_on_Bag_mouse_entered"]
+[connection signal="mouse_exited" from="Bag" to="Bag" method="_on_Bag_mouse_exited"]
+[connection signal="mouse_entered" from="Table" to="Table" method="_on_Table_mouse_entered"]
+[connection signal="mouse_exited" from="Table" to="Table" method="_on_Table_mouse_exited"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://texture/Bag/Empty bag.png" type="Texture" id=1]
+[ext_resource path="res://texture/Bag/Half bag.png" type="Texture" id=2]
+[ext_resource path="res://texture/Bag/Full bag.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureButton
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+var playerHand
+
+signal pickup(item)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	playerHand = get_parent()
+	playerHand.connect(\"pickup\", self, \"_on_Item_pickup\")
+	
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func apply_item(item):
+	if item.get_groups()[0] =
+		
+"
+
+[node name="NewBag" type="TextureButton"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 3 )
+texture_focused = ExtResource( 2 )
+script = SubResource( 1 )
