@@ -12,7 +12,16 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="Daisy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 848, 311 )
+position = Vector2( 942, 647 )
+
+[node name="Daisy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1149, 729 )
+
+[node name="Daisy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1173, 618 )
+
+[node name="Daisy4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 971, 731 )
 
 [node name="Bag" parent="." instance=ExtResource( 1 )]
 position = Vector2( 302, 309 )
