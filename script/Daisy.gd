@@ -1,16 +1,20 @@
 extends Node
 
+signal picked_up
+
 export var weight: float = 2.0
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export var place_offset: Vector2 = Vector2.UP * 10
 
 func get_weight() -> float:
 	return weight
 	
+func get_place_offset() -> Vector2:
+	return place_offset
+	
 func on_click_no_item():
 	ItemManager.pickUpItem(get_node("."))
+	emit_signal("picked_up")
 	
 func on_click_with_item(item):
 	if item.has_method("collectFlower"):
@@ -21,7 +25,3 @@ func on_click_with_item(item):
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

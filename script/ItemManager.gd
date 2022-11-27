@@ -13,9 +13,7 @@ var hand: Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var items = get_tree().get_nodes_in_group("Item")
-	for item in items:
-		item.connect("")
+	pass
 		
 func _input(event):
 	#var space_state = Physics2DDirectSpaceState.get_world_2d().direct_space_state
@@ -52,7 +50,7 @@ func pickUpItem(item: Node2D):
 	
 func dropItem():
 	if heldItem != null:
-		heldItem.position = mousePos
+		heldItem.position = mousePos + heldItem.get_place_offset()
 		heldItem.get_node("CollisionPolygon2D").set_disabled(false)
 		heldItem = null
 		return
