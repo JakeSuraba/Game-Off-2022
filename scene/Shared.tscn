@@ -8,25 +8,42 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
+z_as_relative = false
 texture = ExtResource( 4 )
 centered = false
 
 [node name="Daisy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 942, 647 )
+z_index = 1
+z_as_relative = false
+priority = 2.0
 
 [node name="Daisy2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1149, 729 )
+z_index = 1
+z_as_relative = false
+priority = 2.0
 
 [node name="Daisy3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1173, 618 )
+z_index = 1
+z_as_relative = false
+priority = 2.0
 
 [node name="Daisy4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 971, 731 )
+z_index = 1
+z_as_relative = false
+priority = 2.0
 
 [node name="Bag" parent="." instance=ExtResource( 1 )]
 position = Vector2( 302, 309 )
+z_as_relative = false
+priority = 1.0
 
 [node name="Table" type="Area2D" parent="."]
+z_index = -1
+z_as_relative = false
 script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table"]

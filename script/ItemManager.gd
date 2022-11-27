@@ -25,6 +25,7 @@ func _input(event):
 		print_debug("click")
 		
 		var shapes = get_world_2d().direct_space_state.intersect_point(mousePos, 32, [], 0x7FFFFFFF, true, true) # The last 'true' enables Area2D intersections, previous four values are all defaults
+		shapes.sort_custom(self, "compShapeZIndex")
 		for shape in shapes:
 			if heldItem != null and shape["collider"].has_method("on_click_with_item"):
 				shape["collider"].on_click_with_item(heldItem)
@@ -63,4 +64,6 @@ func _process(delta):
 	mousePos = get_viewport().get_mouse_position()
 	if heldItem != null:
 		heldItem.position = mousePos
-	
+
+func compShapeZIndex(a, b):
+	return a["collider"].z_index > b["collider"].z_index

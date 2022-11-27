@@ -10,17 +10,6 @@ export var full_threshold: float = 10.0
 
 export var half_texture: Texture
 export var full_texture: Texture
-
-
-func _on_Bag_mouse_entered():
-	print_debug("enter bag")
-
-	return
-	
-func _on_Bag_mouse_exited():
-	print_debug("exit bag")
-
-	return
 	
 func pickUp(item):
 	if ItemManager.heldItem == null:
