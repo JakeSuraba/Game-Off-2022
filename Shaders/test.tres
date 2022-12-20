@@ -1,0 +1,89 @@
+[gd_resource type="VisualShader" load_steps=4 format=2]
+
+[sub_resource type="VisualShaderNodeColorOp" id=1]
+output_port_for_preview = 0
+operator = 4
+
+[sub_resource type="VisualShaderNodeInput" id=2]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=3]
+output_port_for_preview = 0
+uniform_name = "tex1"
+texture_type = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible;
+
+uniform sampler2D tex1 : hint_albedo;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:3
+	vec3 n_out3p0 = COLOR.rgb;
+
+// TextureUniform:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 n_tex_read = texture(tex1, UV.xy);
+		n_out5p0 = n_tex_read.rgb;
+		n_out5p1 = n_tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0;
+	{
+		float base = n_out3p0.x;
+		float blend = n_out5p0.x;
+		if (base < 0.5) {
+			n_out2p0.x = 2.0 * base * blend;
+		} else {
+			n_out2p0.x = 1.0 - 2.0 * (1.0 - blend) * (1.0 - base);
+		}
+	}
+	{
+		float base = n_out3p0.y;
+		float blend = n_out5p0.y;
+		if (base < 0.5) {
+			n_out2p0.y = 2.0 * base * blend;
+		} else {
+			n_out2p0.y = 1.0 - 2.0 * (1.0 - blend) * (1.0 - base);
+		}
+	}
+	{
+		float base = n_out3p0.z;
+		float blend = n_out5p0.z;
+		if (base < 0.5) {
+			n_out2p0.z = 2.0 * base * blend;
+		} else {
+			n_out2p0.z = 1.0 - 2.0 * (1.0 - blend) * (1.0 - base);
+		}
+	}
+
+// Output:0
+	ALBEDO = n_out2p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -33.6667, 88.6667 )
+nodes/fragment/0/position = Vector2( 780, 160 )
+nodes/fragment/2/node = SubResource( 1 )
+nodes/fragment/2/position = Vector2( 520, 260 )
+nodes/fragment/3/node = SubResource( 2 )
+nodes/fragment/3/position = Vector2( 220, 260 )
+nodes/fragment/5/node = SubResource( 3 )
+nodes/fragment/5/position = Vector2( 260, 440 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 2, 0, 2, 0, 0, 0, 5, 0, 2, 1 )

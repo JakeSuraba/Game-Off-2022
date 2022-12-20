@@ -85,4 +85,4 @@ position = Vector2( 283, 113 )
 polygon = PoolVector2Array( 458, 673, 460, 652, 496, 652, 495, 673 )
 
 [node name="GenericCustomer" parent="." instance=ExtResource( 8 )]
-position = Vector2( 964, 337 )
+position = Vector2( 804, 367 )
